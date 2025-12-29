@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krira Tech - Engineering Safety, Automation & Innovation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --dark-bg: #1f2937;
+            --light-bg: #f9fafb;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        nav {
+            background: var(--dark-bg);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .view-details {
+            color: var(--accent-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .project-card:hover .view-details {
+            gap: 1rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .about-image-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2rem auto;
+            padding: 0;
+            border-radius: 10px;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .modal-header h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .modal-section p, .modal-section ul {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .modal-section ul {
+            margin-left: 1.5rem;
+        }
+
+        .modal-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input, textarea {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">⚡ Krira Tech</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1>Engineering Safety, Automation & Innovation</h1>
+        <p>Leading provider of embedded systems, IoT solutions, and industrial automation technologies</p>
+        <div class="cta-buttons">
+            <a href="#contact" class="btn btn-primary">Contact Us</a>
+            <a href="#services" class="btn btn-secondary">Our Services</a>
+            <a href="#projects" class="btn btn-secondary">View Projects</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">About Krira Tech</h2>
+        <p class="section-subtitle">Your trusted partner in technology and innovation</p>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Krira Tech is a leading technology, embedded systems, automation, and industrial solutions company dedicated to providing practical engineering solutions that drive innovation and efficiency across industries.</p>
+                <p>We specialize in developing cutting-edge electronics, IoT systems, railway monitoring solutions, robotics projects, and industrial-grade hardware for commercial use. Our team of experienced engineers and technicians work tirelessly to deliver custom solutions tailored to meet the unique needs of each client.</p>
+                <p>With extensive experience in delivering complex projects to various industries including railways, mining, healthcare, and manufacturing, Krira Tech has established itself as a trusted partner for businesses seeking reliable, innovative technological solutions.</p>
+                <p>Our commitment to quality, safety, and innovation drives everything we do, ensuring that our clients receive products and services that exceed expectations and stand the test of time.</p>
+            </div>
+            <div class="about-image-container">
+                <img src="images/company-photo.jpg" alt="Krira Tech Company" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="container" style="background: var(--light-bg); margin: 4rem auto; padding: 4rem 2rem; border-radius: 10px;">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Comprehensive technology solutions for modern industries</p>
+        <div class="grid">
+            <div class="card">
+                <h3>🔌 Embedded Systems Development</h3>
+                <p>Custom embedded system design and development for specialized applications. We create efficient, reliable solutions using the latest microcontroller and processor technologies.</p>
+            </div>
+            <div class="card">
+                <h3>🌐 IoT Solutions & Wireless Data Systems</h3>
+                <p>Complete IoT ecosystem development including GSM, Wi-Fi, and LoRa based wireless data transmission systems for real-time monitoring and control applications.</p>
+            </div>
+            <div class="card">
+                <h3>📟 PCB Design and Hardware Manufacturing</h3>
+                <p>Professional PCB design services and prototype manufacturing with quick turnaround times. From schematic to production-ready boards.</p>
+            </div>
+            <div class="card">
+                <h3>⚙️ Industrial Automation & Robotics</h3>
+                <p>Automation solutions to streamline industrial processes, increase efficiency, and reduce operational costs. Custom robotics development for specialized tasks.</p>
+            </div>
+            <div class="card">
+                <h3>💡 Electronic Product Development</h3>
+                <p>End-to-end product development from concept to production. We handle design, prototyping, testing, and manufacturing of electronic products.</p>
+            </div>
+            <div class="card">
+                <h3>📚 Training, Consulting & R&D Support</h3>
+                <p>Expert training programs, technical consulting services, and research & development support to help organizations build in-house capabilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title">Our Projects</h2>
+        <p class="section-subtitle">Innovative solutions delivered across various industries</p>
+        <div class="grid">
+            <div class="project-card" onclick="openModal('project1')">
+                <img src="images/hot-axle-box.jpg" alt="Hot Axle Box" class="project-image">
+                <div class="project-content">
+                    <h3>Hot Axle Box Temperature Monitoring System</h3>
+                    <p>Real-time temperature monitoring for railway safety and accident prevention.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project2')">
+                <img src="images/crt-monitoring.jpg" alt="CRT Monitoring" class="project-image">
+                <div class="project-content">
+                    <h3>CRT Coach/Track Temperature Monitoring</h3>
+                    <p>Comprehensive temperature tracking for continuous safety inspection.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project3')">
+                <img src="images/data-transfer.jpg" alt="Data Transfer" class="project-image">
+                <div class="project-content">
+                    <h3>Railway Track Temperature Data Transfer System</h3>
+                    <p>Robust data transmission to railway department dashboard.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project4')">
+                <img src="images/inspection-robot.jpg" alt="Inspection Robot" class="project-image">
+                <div class="project-content">
+                    <h3>Robotics & Inspection Bots</h3>
+                    <p>Custom-designed robots for industrial inspection and automation.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project5')">
+                <img src="images/air-sterilizer.jpg" alt="Air Sterilizer" class="project-image">
+                <div class="project-content">
+                    <h3>Air Sterilizer System</h3>
+                    <p>Advanced UV/HEPA/Active Ion air purification technology.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project6')">
+                <img src="images/aqi-meter.jpg" alt="AQI Meter" class="project-image">
+                <div class="project-content">
+                    <h3>ESP32 Based AQI Meter</h3>
+                    <p>Real-time air quality monitoring with digital display.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project7')">
+                <img src="images/wireless-charger.jpg" alt="Wireless Charger" class="project-image">
+                <div class="project-content">
+                    <h3>Wireless Charger Prototype</h3>
+                    <p>Efficient wireless power transfer technology demonstration.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('project8')">
+                <img src="images/camera-robot.jpg" alt="Camera Robot" class="project-image">
+                <div class="project-content">
+                    <h3>Camera Tracking Robot</h3>
+                    <p>ESP32 CAM-based intelligent surveillance and navigation.</p>
+                    <span class="view-details">View Details →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="project1" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project1')">&times;</span>
+                <h2>Hot Axle Box Temperature Monitoring System</h2>
+                <p>Railway Safety & Accident Prevention Solution</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/hot-axle-box.jpg" alt="Hot Axle Box Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>The Hot Axle Box Temperature Monitoring System is an advanced IoT-based solution designed to prevent railway accidents by continuously monitoring wheel bearing temperatures in real-time. This critical safety system helps detect overheating conditions before they lead to catastrophic failures.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Developed custom temperature sensors with industrial-grade accuracy (±0.5°C)</li>
+                        <li>Designed wireless data transmission module using GSM/GPRS technology</li>
+                        <li>Created embedded firmware for real-time data processing and alert generation</li>
+                        <li>Integrated with existing railway department portal using secure API protocols</li>
+                        <li>Implemented battery backup system for uninterrupted operation</li>
+                        <li>Conducted extensive field testing on operational railway tracks</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Safety:</strong> Prevents derailments caused by hot axle box failures</li>
+                        <li><strong>Early Warning:</strong> Detects temperature anomalies 30-45 minutes before critical failure</li>
+                        <li><strong>Cost Savings:</strong> Reduces maintenance costs through predictive maintenance</li>
+                        <li><strong>Real-time Monitoring:</strong> Continuous data transmission to central monitoring station</li>
+                        <li><strong>Compliance:</strong> Meets Indian Railway safety standards and regulations</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Temperature Range: -40°C to +150°C</li>
+                        <li>Data Transmission: GSM 2G/3G with fallback support</li>
+                        <li>Power Supply: 12V DC with solar charging option</li>
+                        <li>Operating Environment: IP67 rated weatherproof enclosure</li>
+                        <li>Alert System: SMS and dashboard notifications for threshold violations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project2" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project2')">&times;</span>
+                <h2>CRT Coach/Track Temperature Monitoring System</h2>
+                <p>Comprehensive Railway Infrastructure Safety</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/crt-monitoring.jpg" alt="CRT Monitoring Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>The CRT (Continuous Rail Temperature) Monitoring System is designed to track temperature variations across railway coaches and track infrastructure. This system provides critical data for maintenance planning and safety compliance, ensuring optimal track conditions throughout varying weather conditions.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Deployed multiple sensor nodes along track sections (every 500 meters)</li>
+                        <li>Developed cloud-based data aggregation and analytics platform</li>
+                        <li>Created mobile app for field engineers to access real-time data</li>
+                        <li>Implemented machine learning algorithms for predictive maintenance</li>
+                        <li>Designed ruggedized hardware for harsh environmental conditions</li>
+                        <li>Integrated automatic report generation for safety inspections</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Track Buckling Prevention:</strong> Monitors rail expansion due to temperature changes</li>
+                        <li><strong>Maintenance Optimization:</strong> Data-driven scheduling reduces unnecessary inspections</li>
+                        <li><strong>Historical Analysis:</strong> Long-term data storage for trend analysis and forecasting</li>
+                        <li><strong>Multi-point Monitoring:</strong> Comprehensive coverage of entire track sections</li>
+                        <li><strong>Automated Alerts:</strong> Instant notifications for critical temperature thresholds</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Sensor Network: LoRa mesh topology for extended range</li>
+                        <li>Data Logging: 5-minute interval readings with 1-year storage capacity</li>
+                        <li>Communication: 4G LTE with LoRaWAN backup</li>
+                        <li>Dashboard: Web-based interface with mobile responsive design</li>
+                        <li>Analytics: Predictive algorithms with 95% accuracy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project3" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project3')">&times;</span>
+                <h2>Railway Track Temperature Data Transfer System</h2>
+                <p>Seamless Integration with Railway Department Portal</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/data-transfer.jpg" alt="Data Transfer Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>This specialized data transfer system serves as the critical communication backbone between field monitoring devices and the centralized railway department dashboard. It ensures reliable, secure, and real-time transmission of temperature monitoring data for immediate analysis and decision-making.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Developed secure API integration with railway department servers</li>
+                        <li>Implemented redundant communication channels (Primary: 4G, Backup: GSM)</li>
+                        <li>Created data buffering system for offline operation during network outages</li>
+                        <li>Designed encryption protocols meeting government security standards</li>
+                        <li>Built real-time dashboard with customizable visualization tools</li>
+                        <li>Established automatic synchronization and data validation mechanisms</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Real-time Visibility:</strong> Instant access to field data for control room operators</li>
+                        <li><strong>Data Integrity:</strong> End-to-end encryption ensures secure transmission</li>
+                        <li><strong>Reliability:</strong> 99.8% uptime with automatic failover mechanisms</li>
+                        <li><strong>Scalability:</strong> System supports unlimited sensor nodes and locations</li>
+                        <li><strong>Compliance:</strong> Meets Indian Railway IT security and data protection standards</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Protocol: HTTPS with TLS 1.3 encryption</li>
+                        <li>Data Format: JSON with timestamp and geolocation tagging</li>
+                        <li>Transmission Frequency: Every 5 minutes (configurable)</li>
+                        <li>Bandwidth: Low data consumption (~50KB per transmission)</li>
+                        <li>Offline Buffer: Stores up to 72 hours of data locally</li>
+                        <li>Dashboard Access: Role-based authentication with audit logs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project4" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project4')">&times;</span>
+                <h2>Robotics & Inspection Bots</h2>
+                <p>Autonomous Industrial Inspection Solutions</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/inspection-robot.jpg" alt="Inspection Robot Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>Our custom-designed inspection robots are built to navigate challenging industrial environments, performing visual inspections, data collection, and monitoring tasks in hazardous or hard-to-reach areas. These autonomous systems enhance workplace safety while improving inspection efficiency and accuracy.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Designed modular robot chassis adaptable to different terrains and environments</li>
+                        <li>Integrated HD cameras, thermal imaging, and gas detection sensors</li>
+                        <li>Developed autonomous navigation using SLAM (Simultaneous Localization and Mapping)</li>
+                        <li>Created remote control interface with live video streaming</li>
+                        <li>Implemented obstacle detection and collision avoidance systems</li>
+                        <li>Built custom gripper mechanisms for sample collection</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Worker Safety:</strong> Eliminates human exposure to dangerous environments</li>
+                        <li><strong>24/7 Operation:</strong> Continuous monitoring without fatigue or breaks</li>
+                        <li><strong>Cost Efficiency:</strong> Reduces inspection time by 60% compared to manual methods</li>
+                        <li><strong>Data Accuracy:</strong> Consistent and repeatable inspection procedures</li>
+                        <li><strong>Remote Access:</strong> Inspect confined spaces and hazardous areas remotely</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Platform: ROS (Robot Operating System) on embedded Linux</li>
+                        <li>Sensors: Lidar, ultrasonic, IMU, and multi-spectral cameras</li>
+                        <li>Battery Life: 4-6 hours continuous operation</li>
+                        <li>Load Capacity: Up to 5kg payload</li>
+                        <li>Communication: Wi-Fi and 4G LTE with 1km range</li>
+                        <li>Environmental Rating: IP65 dust and water resistant</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project5" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project5')">&times;</span>
+                <h2>Air Sterilizer System (UV/HEPA/Active Ion)</h2>
+                <p>Advanced Multi-Stage Air Purification Technology</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/air-sterilizer.jpg" alt="Air Sterilizer Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>Our medical-grade air sterilization system combines three proven technologies—UV-C germicidal irradiation, HEPA filtration, and active ion generation—to provide comprehensive air purification for hospitals, laboratories, offices, and clean room environments. The system effectively neutralizes airborne pathogens, allergens, and pollutants.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Engineered multi-stage filtration system with optimized airflow dynamics</li>
+                        <li>Integrated medical-grade UV-C lamps with automatic safety shutoff</li>
+                        <li>Developed microcontroller-based control system with touch interface</li>
+                        <li>Implemented real-time air quality monitoring with PM2.5, VOC, and CO2 sensors</li>
+                        <li>Created smartphone app for remote monitoring and control</li>
+                        <li>Designed quiet operation mode (below 40dB) for hospital environments</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Pathogen Elimination:</strong> 99.97% effectiveness against bacteria, viruses, and mold spores</li>
+                        <li><strong>Three-Layer Protection:</strong> HEPA filters particles, UV-C kills microbes, ions neutralize odors</li>
+                        <li><strong>Smart Operation:</strong> Auto-adjusts fan speed based on air quality readings</li>
+                        <li><strong>Energy Efficient:</strong> Low power consumption with eco mode</li>
+                        <li><strong>Medical Compliance:</strong> Meets hospital and clean room standards</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Coverage Area: Up to 800 sq. ft.</li>
+                        <li>HEPA Filter: H13 grade (99.97% efficiency at 0.3 microns)</li>
+                        <li>UV-C Power: 36W germicidal lamp with 9000-hour lifespan</li>
+                        <li>CADR Rating: 350 m³/hour</li>
+                        <li>Ion Output: 10 million negative ions per cm³</li>
+                        <li>Smart Features: Wi-Fi connectivity, app control, filter replacement alerts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project6" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project6')">&times;</span>
+                <h2>ESP32 Based AQI Meter with Display</h2>
+                <p>Portable Air Quality Monitoring Solution</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/aqi-meter.jpg" alt="AQI Meter Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>A compact and portable Air Quality Index (AQI) meter built on the ESP32 platform that provides real-time measurements of key air pollutants and environmental parameters. Perfect for homes, offices, schools, and outdoor air quality monitoring applications.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Selected and calibrated multiple sensor modules for accurate readings</li>
+                        <li>Developed custom PCB with ESP32 microcontroller and OLED display</li>
+                        <li>Created intuitive user interface showing real-time AQI, PM2.5, PM10, CO2, and temperature</li>
+                        <li>Implemented Wi-Fi connectivity for data logging to cloud platform</li>
+                        <li>Designed 3D-printed enclosure with ventilation for sensor accuracy</li>
+                        <li>Built mobile app for historical data visualization and alerts</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Health Awareness:</strong> Helps users understand and respond to air quality conditions</li>
+                        <li><strong>Real-time Monitoring:</strong> Instant feedback on indoor and outdoor air quality</li>
+                        <li><strong>Portable Design:</strong> Battery-powered for use anywhere</li>
+                        <li><strong>Smart Alerts:</strong> Notifications when air quality exceeds safe thresholds</li>
+                        <li><strong>Data Logging:</strong> Track air quality trends over time</li>
+                        <li><strong>Affordable:</strong> Cost-effective alternative to expensive commercial AQI meters</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Microcontroller: ESP32 dual-core with Wi-Fi and Bluetooth</li>
+                        <li>Sensors: PMS5003 (PM2.5/PM10), MQ-135 (CO2), DHT22 (temp/humidity)</li>
+                        <li>Display: 1.3" OLED (128x64 pixels)</li>
+                        <li>Battery: Rechargeable Li-ion with 8-hour runtime</li>
+                        <li>Connectivity: Wi-Fi for cloud sync and OTA updates</li>
+                        <li>Dimensions: 100mm x 60mm x 40mm (compact handheld size)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project7" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project7')">&times;</span>
+                <h2>Wireless Charger Prototype</h2>
+                <p>Efficient Inductive Power Transfer Technology</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/wireless-charger.jpg" alt="Wireless Charger Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>An innovative wireless charging solution prototype demonstrating efficient power transfer using electromagnetic induction. This project explores advanced power electronics and resonant circuit design for next-generation charging applications for smartphones, wearables, and IoT devices.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Designed resonant inductive coupling circuit with optimized coil geometry</li>
+                        <li>Developed power management system with foreign object detection</li>
+                        <li>Implemented Qi wireless charging standard compatibility</li>
+                        <li>Created thermal management solution to prevent overheating</li>
+                        <li>Built prototype transmitter and receiver modules with custom PCBs</li>
+                        <li>Conducted efficiency testing achieving 75% power transfer efficiency</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Convenience:</strong> Eliminates cable clutter and wear on charging ports</li>
+                        <li><strong>Universal Compatibility:</strong> Works with Qi-enabled devices</li>
+                        <li><strong>Safety Features:</strong> Automatic shutoff, overheat protection, foreign object detection</li>
+                        <li><strong>Fast Charging:</strong> Supports up to 15W power delivery</li>
+                        <li><strong>Future Ready:</strong> Scalable design for higher power applications</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Power Output: 5W, 10W, and 15W modes</li>
+                        <li>Frequency: 110-205 kHz (Qi standard)</li>
+                        <li>Efficiency: Up to 75% at optimal alignment</li>
+                        <li>Charging Distance: Up to 8mm</li>
+                        <li>Input: 12V DC / 2A adapter</li>
+                        <li>Protection: Overcurrent, overvoltage, overtemperature safeguards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project8" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('project8')">&times;</span>
+                <h2>Camera Tracking Robot with ESP32 CAM</h2>
+                <p>Intelligent Surveillance and Object Tracking System</p>
+            </div>
+            <div class="modal-body">
+                <img src="images/camera-robot.jpg" alt="Camera Robot Detail" class="modal-image">
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>An intelligent mobile robot platform equipped with ESP32-CAM module that can autonomously track and follow objects or people. This system demonstrates computer vision integration with robotics for applications in surveillance, security, automated photography, and interactive demonstrations.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>What We Did</h3>
+                    <ul>
+                        <li>Integrated ESP32-CAM with robotic chassis and motor control system</li>
+                        <li>Implemented real-time image processing for object detection and tracking</li>
+                        <li>Developed PID-based control algorithm for smooth tracking motion</li>
+                        <li>Created web-based interface for live video streaming and remote control</li>
+                        <li>Added face detection capability using edge AI processing</li>
+                        <li>Built battery management system with low-power mode</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Purpose & Benefits</h3>
+                    <ul>
+                        <li><strong>Autonomous Surveillance:</strong> Automatically follows and monitors subjects of interest</li>
+                        <li><strong>Remote Monitoring:</strong> Live video streaming accessible from anywhere via web browser</li>
+                        <li><strong>Educational Platform:</strong> Excellent learning tool for robotics and computer vision</li>
+                        <li><strong>Cost-Effective:</strong> Uses affordable ESP32-CAM module (~$10)</li>
+                        <li><strong>Expandable:</strong> Modular design allows addition of more sensors and features</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Technical Specifications</h3>
+                    <ul>
+                        <li>Camera: OV2640 2MP with adjustable lens</li>
+                        <li>Processor: ESP32 dual-core @ 240MHz with Wi-Fi</li>
+                        <li>Video: 800x600 resolution at 25fps</li>
+                        <li>Motors: 4x DC gear motors with encoder feedback</li>
+                        <li>Range: Wi-Fi connectivity up to 50 meters</li>
+                        <li>Features: Face detection, color tracking, motion detection</li>
+                        <li>Battery: 7.4V Li-ion with 2-hour runtime</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="container" style="background: var(--light-bg); margin: 4rem auto; padding: 4rem 2rem; border-radius: 10px;">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">High-quality components and systems for your projects</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Motor Drivers & Controllers</h3>
+                <p>Industrial-grade motor drivers and controllers for various applications, supporting DC, stepper, and servo motors with precise control capabilities.</p>
+            </div>
+            <div class="card">
+                <h3>Sensors & Measurement Devices</h3>
+                <p>Wide range of sensors including temperature, pressure, proximity, and environmental sensors for industrial and commercial applications.</p>
+            </div>
+            <div class="card">
+                <h3>Custom PCB Solutions</h3>
+                <p>Ready-to-use and custom-designed PCB modules for rapid prototyping and production deployment.</p>
+            </div>
+            <div class="card">
+                <h3>IoT Boards & Modules</h3>
+                <p>Complete IoT development boards with various connectivity options including Wi-Fi, Bluetooth, GSM, and LoRa.</p>
+            </div>
+            <div class="card">
+                <h3>Microcontroller Systems</h3>
+                <p>Development boards and evaluation kits based on popular microcontroller platforms for embedded system development.</p>
+            </div>
+            <div class="card">
+                <h3>Robotics Kits & Automation Modules</h3>
+                <p>Educational and professional robotics kits, along with industrial automation modules for process control and monitoring.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Get in touch with our team</p>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@kriratech.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+91 XXXXX XXXXX</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Address</h4>
+                        <p>Your Office Address<br>City, State - PIN Code</p>
+                    </div>
+                </div>
+                <a href="https://wa.me/91XXXXXXXXXX" class="btn btn-primary" style="margin-top: 1rem; text-align: center;">
+                    💬 Chat on WhatsApp
+                </a>
+            </div>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="tel" placeholder="Your Phone">
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Krira Tech. All rights reserved. | Engineering Safety, Automation & Innovation</p>
+    </footer>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(31, 41, 55, 0.95)';
+            } else {
+                nav.style.background = 'var(--dark-bg)';
+            }
+        });
+    </script>
+</body>
+</html>
