@@ -1,1149 +1,1029 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krira Tech - Engineering Safety, Automation & Innovation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #f59e0b;
-            --dark-bg: #1f2937;
-            --light-bg: #f9fafb;
-            --text-dark: #111827;
-            --text-light: #6b7280;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-        }
-
-        nav {
-            background: var(--dark-bg);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 0.8s;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            animation: fadeInUp 1s;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1.2s;
-        }
-
-        .btn {
-            padding: 0.9rem 2rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary-color);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-content h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-content p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .view-details {
-            color: var(--accent-color);
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s;
-        }
-
-        .project-card:hover .view-details {
-            gap: 1rem;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text {
-            line-height: 1.8;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-
-        .about-image-container {
-            width: 100%;
-            height: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .about-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 2rem auto;
-            padding: 0;
-            border-radius: 10px;
-            max-width: 900px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: slideDown 0.3s;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .modal-header h2 {
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .modal-section p, .modal-section ul {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        .modal-section ul {
-            margin-left: 1.5rem;
-        }
-
-        .modal-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .close {
-            color: white;
-            float: right;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .close:hover {
-            color: var(--accent-color);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--light-bg);
-            border-radius: 8px;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        input, textarea {
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        footer {
-            background: var(--dark-bg);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .about-content,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                margin: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">⚡ Krira Tech</div>
-            <ul class="nav-links">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section id="home" class="hero">
-        <h1>Engineering Safety, Automation & Innovation</h1>
-        <p>Leading provider of embedded systems, IoT solutions, and industrial automation technologies</p>
-        <div class="cta-buttons">
-            <a href="#contact" class="btn btn-primary">Contact Us</a>
-            <a href="#services" class="btn btn-secondary">Our Services</a>
-            <a href="#projects" class="btn btn-secondary">View Projects</a>
-        </div>
-    </section>
-
-    <section id="about" class="container">
-        <h2 class="section-title">About Krira Tech</h2>
-        <p class="section-subtitle">Your trusted partner in technology and innovation</p>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Krira Tech is a leading technology, embedded systems, automation, and industrial solutions company dedicated to providing practical engineering solutions that drive innovation and efficiency across industries.</p>
-                <p>We specialize in developing cutting-edge electronics, IoT systems, railway monitoring solutions, robotics projects, and industrial-grade hardware for commercial use. Our team of experienced engineers and technicians work tirelessly to deliver custom solutions tailored to meet the unique needs of each client.</p>
-                <p>With extensive experience in delivering complex projects to various industries including railways, mining, healthcare, and manufacturing, Krira Tech has established itself as a trusted partner for businesses seeking reliable, innovative technological solutions.</p>
-                <p>Our commitment to quality, safety, and innovation drives everything we do, ensuring that our clients receive products and services that exceed expectations and stand the test of time.</p>
-            </div>
-            <div class="about-image-container">
-                <img src="images/company-photo.jpg" alt="Krira Tech Company" class="about-image">
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="container" style="background: var(--light-bg); margin: 4rem auto; padding: 4rem 2rem; border-radius: 10px;">
-        <h2 class="section-title">Our Services</h2>
-        <p class="section-subtitle">Comprehensive technology solutions for modern industries</p>
-        <div class="grid">
-            <div class="card">
-                <h3>🔌 Embedded Systems Development</h3>
-                <p>Custom embedded system design and development for specialized applications. We create efficient, reliable solutions using the latest microcontroller and processor technologies.</p>
-            </div>
-            <div class="card">
-                <h3>🌐 IoT Solutions & Wireless Data Systems</h3>
-                <p>Complete IoT ecosystem development including GSM, Wi-Fi, and LoRa based wireless data transmission systems for real-time monitoring and control applications.</p>
-            </div>
-            <div class="card">
-                <h3>📟 PCB Design and Hardware Manufacturing</h3>
-                <p>Professional PCB design services and prototype manufacturing with quick turnaround times. From schematic to production-ready boards.</p>
-            </div>
-            <div class="card">
-                <h3>⚙️ Industrial Automation & Robotics</h3>
-                <p>Automation solutions to streamline industrial processes, increase efficiency, and reduce operational costs. Custom robotics development for specialized tasks.</p>
-            </div>
-            <div class="card">
-                <h3>💡 Electronic Product Development</h3>
-                <p>End-to-end product development from concept to production. We handle design, prototyping, testing, and manufacturing of electronic products.</p>
-            </div>
-            <div class="card">
-                <h3>📚 Training, Consulting & R&D Support</h3>
-                <p>Expert training programs, technical consulting services, and research & development support to help organizations build in-house capabilities.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="container">
-        <h2 class="section-title">Our Projects</h2>
-        <p class="section-subtitle">Innovative solutions delivered across various industries</p>
-        <div class="grid">
-            <div class="project-card" onclick="openModal('project1')">
-                <img src="images/hot-axle-box.jpg" alt="Hot Axle Box" class="project-image">
-                <div class="project-content">
-                    <h3>Hot Axle Box Temperature Monitoring System</h3>
-                    <p>Real-time temperature monitoring for railway safety and accident prevention.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project2')">
-                <img src="images/crt-monitoring.jpg" alt="CRT Monitoring" class="project-image">
-                <div class="project-content">
-                    <h3>CRT Coach/Track Temperature Monitoring</h3>
-                    <p>Comprehensive temperature tracking for continuous safety inspection.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project3')">
-                <img src="images/data-transfer.jpg" alt="Data Transfer" class="project-image">
-                <div class="project-content">
-                    <h3>Railway Track Temperature Data Transfer System</h3>
-                    <p>Robust data transmission to railway department dashboard.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project4')">
-                <img src="images/inspection-robot.jpg" alt="Inspection Robot" class="project-image">
-                <div class="project-content">
-                    <h3>Robotics & Inspection Bots</h3>
-                    <p>Custom-designed robots for industrial inspection and automation.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project5')">
-                <img src="images/air-sterilizer.jpg" alt="Air Sterilizer" class="project-image">
-                <div class="project-content">
-                    <h3>Air Sterilizer System</h3>
-                    <p>Advanced UV/HEPA/Active Ion air purification technology.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project6')">
-                <img src="images/aqi-meter.jpg" alt="AQI Meter" class="project-image">
-                <div class="project-content">
-                    <h3>ESP32 Based AQI Meter</h3>
-                    <p>Real-time air quality monitoring with digital display.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project7')">
-                <img src="images/wireless-charger.jpg" alt="Wireless Charger" class="project-image">
-                <div class="project-content">
-                    <h3>Wireless Charger Prototype</h3>
-                    <p>Efficient wireless power transfer technology demonstration.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openModal('project8')">
-                <img src="images/camera-robot.jpg" alt="Camera Robot" class="project-image">
-                <div class="project-content">
-                    <h3>Camera Tracking Robot</h3>
-                    <p>ESP32 CAM-based intelligent surveillance and navigation.</p>
-                    <span class="view-details">View Details →</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="project1" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project1')">&times;</span>
-                <h2>Hot Axle Box Temperature Monitoring System</h2>
-                <p>Railway Safety & Accident Prevention Solution</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/hot-axle-box.jpg" alt="Hot Axle Box Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>The Hot Axle Box Temperature Monitoring System is an advanced IoT-based solution designed to prevent railway accidents by continuously monitoring wheel bearing temperatures in real-time. This critical safety system helps detect overheating conditions before they lead to catastrophic failures.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Developed custom temperature sensors with industrial-grade accuracy (±0.5°C)</li>
-                        <li>Designed wireless data transmission module using GSM/GPRS technology</li>
-                        <li>Created embedded firmware for real-time data processing and alert generation</li>
-                        <li>Integrated with existing railway department portal using secure API protocols</li>
-                        <li>Implemented battery backup system for uninterrupted operation</li>
-                        <li>Conducted extensive field testing on operational railway tracks</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Safety:</strong> Prevents derailments caused by hot axle box failures</li>
-                        <li><strong>Early Warning:</strong> Detects temperature anomalies 30-45 minutes before critical failure</li>
-                        <li><strong>Cost Savings:</strong> Reduces maintenance costs through predictive maintenance</li>
-                        <li><strong>Real-time Monitoring:</strong> Continuous data transmission to central monitoring station</li>
-                        <li><strong>Compliance:</strong> Meets Indian Railway safety standards and regulations</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Temperature Range: -40°C to +150°C</li>
-                        <li>Data Transmission: GSM 2G/3G with fallback support</li>
-                        <li>Power Supply: 12V DC with solar charging option</li>
-                        <li>Operating Environment: IP67 rated weatherproof enclosure</li>
-                        <li>Alert System: SMS and dashboard notifications for threshold violations</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+import React, { useState } from 'react';
+import { Menu, X, ChevronRight, Cpu, Wifi, Shield, Zap, Mail, Phone, MapPin, Clock } from 'lucide-react';
+
+const KriraTechWebsite = () => {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const projects = [
+    {
+      id: 'dual-arduino',
+      name: 'Dual-Arduino Robot System',
+      short: 'RFID-triggered automation with distributed processing across two Arduino boards',
+      why: 'To divide workload between boards to improve automation flow and reduce processing load on a single microcontroller.',
+      problem: 'Single-board systems often face processing bottlenecks when handling multiple sensors, motor control, and communication simultaneously. This dual-board architecture solves that limitation.',
+      work: 'RFID decides action ➜ Servos handle mechanism ➜ DC motors navigate and position the robot with precision.',
+      how: 'One Arduino handles RFID scanning and servo control, while the second Arduino manages motor drivers and IR detection through serial communication commands.',
+      sensors: 'RFID-RC522 Module, IR Obstacle Sensor, Multiple Servo Motors (via PCA9685 driver), L293D Motor Driver, HC-05 Bluetooth Module',
+      usecase: 'Warehouses for automated material delivery, product sorting facilities, inventory management systems, and industrial pick-and-place operations.',
+      upgrade: 'Add ESP32-CAM for visual recognition, implement GPS for outdoor navigation, integrate robotic arm with gripper mechanism, add weight sensors for load management.'
+    },
+    {
+      id: 'self-balancing',
+      name: 'Self-Balancing Robot',
+      short: 'Dynamic stability control system using accelerometer feedback',
+      why: 'To demonstrate dynamic stability and balance control similar to Segway systems and modern two-wheeled transport vehicles.',
+      problem: 'Traditional robots require 3-4 wheels for stability. This project proves that intelligent sensor feedback can maintain balance on just two wheels.',
+      work: 'Maintains its vertical position by continuously adjusting motor speed according to tilt angle detected by the accelerometer.',
+      how: 'GY-61 accelerometer measures tilt angle → Arduino processes data using PID algorithm → L293D motor driver adjusts motor speeds to counteract tilt and maintain balance.',
+      sensors: 'GY-61 Accelerometer Module (3-axis), L293D Motor Driver IC, DC Geared Motors with Encoders, Arduino Uno',
+      usecase: 'R&D laboratories for control system research, robotics education institutions, industrial balance technology prototypes, autonomous delivery robots.',
+      upgrade: 'Implement gyroscope fusion for better stability, add remote control capability, integrate cargo carrying platform, implement autonomous navigation with ultrasonic sensors.'
+    },
+    {
+      id: 'rfid-pickup',
+      name: 'RFID Object Pickup Robot',
+      short: 'Autonomous object selection and retrieval using RFID identification',
+      why: 'To automate object selection and handling using RFID tag identity, eliminating human intervention in material transport.',
+      problem: 'Manual object sorting and retrieval is time-consuming and error-prone. RFID-based automation ensures accurate object identification and handling.',
+      work: 'Robot scans RFID tag → identifies object → moves to pre-mapped location → servo-controlled gripper picks object → returns to drop zone.',
+      how: 'RFID reader identifies tag UID, Arduino matches it with stored location database, motors navigate to coordinates, servo mechanism activates to grip object.',
+      sensors: 'RFID-RC522 Module, Servo Motors for Gripper, L293D Motor Driver, IR Sensors for Line Following, Arduino Nano',
+      usecase: 'Logistics centers for package sorting, warehouse material transport, automated storage and retrieval systems, pharmacy medicine dispensing.',
+      upgrade: 'Add conveyor belt integration, implement multi-object pickup queue, integrate barcode scanning backup, add weight verification sensor.'
+    },
+    {
+      id: 'aqi-meter',
+      name: 'Air Quality Index (AQI) Meter',
+      short: 'ESP32-based real-time air quality monitoring system',
+      why: 'To measure indoor air quality for pollution detection and health monitoring in real-time with wireless data logging capability.',
+      problem: 'Indoor air pollution is invisible but harmful. This device provides quantifiable data to help people make informed decisions about their environment.',
+      work: 'Reads sensor values → calculates AQI → classifies as Good / Moderate / Unhealthy / Hazardous → displays on OLED and sends to cloud.',
+      how: 'Dust sensor measures PM2.5/PM10 particles, DHT11 reads temperature and humidity, ESP32 calculates AQI using standard formulae and transmits data via Wi-Fi.',
+      sensors: 'ESP32 Microcontroller, DHT11 Temperature & Humidity Sensor, GP2Y1010AU0F Dust Sensor, OLED Display Module (128x64)',
+      usecase: 'Offices for employee health monitoring, hospitals and clinics, smart homes, schools and educational institutions, industrial facilities.',
+      upgrade: 'Add CO2 and VOC sensors, implement mobile app with push notifications, integrate with smart home systems, add historical data graphing.'
+    },
+    {
+      id: 'uv-hepa',
+      name: 'AQI + UV & HEPA Purifier System',
+      short: 'Automatic air purification triggered by air quality thresholds',
+      why: 'To provide automatic sterilization and air purification when unsafe AQI levels are detected, protecting occupant health proactively.',
+      problem: 'Manual air purifiers require constant monitoring. This system automatically activates purification when air quality degrades.',
+      work: 'AQI sensor monitors air continuously → When AQI exceeds threshold → UV-C lamp and HEPA fan activate automatically → Purification continues until air quality improves.',
+      how: 'Dust sensor feeds real-time data to Arduino, threshold comparison triggers relay module to power UV lamp and HEPA filter fan unit.',
+      sensors: 'Arduino Uno, GP2Y1010AU0F Dust Sensor, DHT11, Relay Module (2-channel), UV-C Germicidal Lamp, HEPA Filter Fan Unit',
+      usecase: 'Hospitals for infection control, medical laboratories, cleanrooms in pharmaceutical facilities, isolation rooms, indoor cultivation facilities.',
+      upgrade: 'Add ozone level monitoring, implement smart scheduling, integrate air quality prediction algorithms, add voice control interface.'
+    },
+    {
+      id: 'early-warning',
+      name: 'Early Warning System',
+      short: 'Disturbance detection and immediate alarm activation',
+      why: 'To prevent accidents by detecting environmental disturbances early and alerting personnel before situations escalate.',
+      problem: 'Equipment failures and security breaches often go unnoticed until damage occurs. Early detection saves lives and property.',
+      work: 'Vibration/shock sensor monitors for abnormal changes → When threshold exceeded → Buzzer sounds alarm immediately → LED indicators activate → Optional SMS alert sent.',
+      how: 'SW-420 vibration sensor detects motion/shock, Arduino processes signal intensity, triggers multiple alert mechanisms simultaneously.',
+      sensors: 'SW-420 Vibration Sensor Module, Arduino Nano, High-decibel Buzzer, LED Indicators, GSM Module (optional for SMS alerts)',
+      usecase: 'Machine monitoring areas, perimeter security systems, earthquake early warning, equipment safety monitoring, construction site alerts.',
+      upgrade: 'Add camera trigger for visual recording, implement sensor fusion with multiple detection points, integrate with facility management systems, add ML for false alarm reduction.'
+    },
+    {
+      id: 'driving-awareness',
+      name: 'Driving Awareness System',
+      short: 'Driver drowsiness detection with automatic vehicle shutdown',
+      why: 'To reduce accidents caused by driver drowsiness by monitoring eye closure and taking immediate preventive action.',
+      problem: 'Drowsy driving causes thousands of accidents annually. Automatic detection and intervention can save lives.',
+      work: 'IR sensor monitors driver eyes continuously → If eyes remain closed beyond threshold time → Arduino triggers motor shutdown → Alarm sounds → Vehicle stops safely.',
+      how: 'IR eye blink sensor mounted near steering detects eyelid closure, Arduino counts duration, exceeding 2-3 seconds triggers emergency stop protocol.',
+      sensors: 'IR Eye Blink Detection Sensor, Arduino Uno, L293D Motor Driver, DC Motors (vehicle simulation), High-decibel Buzzer, Power Relay',
+      usecase: 'Driving school training vehicles, industrial forklifts and machinery, long-haul transport vehicles, mining equipment operators.',
+      upgrade: 'Add heart rate monitoring, implement facial recognition for driver verification, integrate with vehicle CAN bus, add GPS logging for incident analysis.'
+    },
+    {
+      id: 'esp32-rfid',
+      name: 'ESP32 + RFID Serial Communication Robot',
+      short: 'Decision-based movement system controlled via RFID tags',
+      why: 'To create a decision-based movement system controlled completely through RFID tags, enabling secure and programmable robot behavior.',
+      problem: 'Traditional robots require programming for each task. RFID-based control allows field personnel to change robot behavior simply by scanning different tags.',
+      work: 'RFID tag acts as trigger → ESP32 interprets tag UID → Executes corresponding movement logic → Robot performs programmed action sequence.',
+      how: 'RFID reader scans tag, ESP32 matches UID with stored command database, sends serial commands to motor controller, robot executes movement pattern.',
+      sensors: 'ESP32 Microcontroller, RFID-RC522 Module, L293D Motor Driver, DC Geared Motors, Ultrasonic Sensor (optional obstacle avoidance)',
+      usecase: 'Security-based item movement, access-controlled delivery robots, museum guide robots, hospital medicine cart automation.',
+      upgrade: 'Add ESP32-CAM for remote monitoring, implement cloud-based tag programming, integrate voice feedback system, add multiple robot coordination.'
+    }
+  ];
+
+  const navigation = [
+    { name: 'Home', page: 'home' },
+    { name: 'About Us', page: 'about' },
+    { name: 'Services', page: 'services' },
+    { name: 'Projects', page: 'projects' },
+    { name: 'Contact', page: 'contact' }
+  ];
+
+  const ProjectCard = ({ project, onClick }) => (
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+      <div className="h-48 bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+        <Cpu className="w-20 h-20 text-white opacity-80" />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-3">{project.name}</h3>
+        <p className="text-gray-600 mb-4 line-clamp-3">{project.short}</p>
+        <button
+          onClick={onClick}
+          className="bg-cyan-400 hover:bg-cyan-500 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300 hover:shadow-lg uppercase text-sm"
+        >
+          View Details
+        </button>
+      </div>
     </div>
+  );
 
-    <div id="project2" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project2')">&times;</span>
-                <h2>CRT Coach/Track Temperature Monitoring System</h2>
-                <p>Comprehensive Railway Infrastructure Safety</p>
+  const renderPage = () => {
+    const projectPage = projects.find(p => currentPage === p.id);
+    if (projectPage) {
+      return (
+        <div className="min-h-screen">
+          <div className="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-20">
+            <div className="max-w-6xl mx-auto px-6">
+              <button
+                onClick={() => setCurrentPage('projects')}
+                className="text-cyan-400 hover:text-cyan-300 mb-4 flex items-center gap-2"
+              >
+                ← Back to Projects
+              </button>
+              <h1 className="text-5xl font-bold mb-4">{projectPage.name}</h1>
+              <p className="text-xl text-gray-300">{projectPage.short}</p>
             </div>
-            <div class="modal-body">
-                <img src="images/crt-monitoring.jpg" alt="CRT Monitoring Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>The CRT (Continuous Rail Temperature) Monitoring System is designed to track temperature variations across railway coaches and track infrastructure. This system provides critical data for maintenance planning and safety compliance, ensuring optimal track conditions throughout varying weather conditions.</p>
-                </div>
+          </div>
 
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Deployed multiple sensor nodes along track sections (every 500 meters)</li>
-                        <li>Developed cloud-based data aggregation and analytics platform</li>
-                        <li>Created mobile app for field engineers to access real-time data</li>
-                        <li>Implemented machine learning algorithms for predictive maintenance</li>
-                        <li>Designed ruggedized hardware for harsh environmental conditions</li>
-                        <li>Integrated automatic report generation for safety inspections</li>
-                    </ul>
-                </div>
+          <div className="max-w-6xl mx-auto px-6 py-16">
+            <div className="space-y-12">
+              <section className="bg-white rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  Why It Was Made
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed">{projectPage.why}</p>
+              </section>
 
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Track Buckling Prevention:</strong> Monitors rail expansion due to temperature changes</li>
-                        <li><strong>Maintenance Optimization:</strong> Data-driven scheduling reduces unnecessary inspections</li>
-                        <li><strong>Historical Analysis:</strong> Long-term data storage for trend analysis and forecasting</li>
-                        <li><strong>Multi-point Monitoring:</strong> Comprehensive coverage of entire track sections</li>
-                        <li><strong>Automated Alerts:</strong> Instant notifications for critical temperature thresholds</li>
-                    </ul>
-                </div>
+              <section className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  Problem It Solves
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed">{projectPage.problem}</p>
+              </section>
 
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Sensor Network: LoRa mesh topology for extended range</li>
-                        <li>Data Logging: 5-minute interval readings with 1-year storage capacity</li>
-                        <li>Communication: 4G LTE with LoRaWAN backup</li>
-                        <li>Dashboard: Web-based interface with mobile responsive design</li>
-                        <li>Analytics: Predictive algorithms with 95% accuracy</li>
-                    </ul>
+              <section className="bg-white rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  What Work It Does
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed">{projectPage.work}</p>
+              </section>
+
+              <section className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  How It Works
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed">{projectPage.how}</p>
+              </section>
+
+              <section className="bg-white rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  Sensors & Components Used
+                </h2>
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <p className="text-lg text-gray-700 leading-relaxed font-mono">{projectPage.sensors}</p>
                 </div>
+              </section>
+
+              <section className="bg-gradient-to-br from-green-50 to-cyan-50 rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  Real-World Industrial Use Case
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed">{projectPage.usecase}</p>
+              </section>
+
+              <section className="bg-white rounded-lg shadow-lg p-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                  <div className="w-2 h-8 bg-cyan-400 rounded"></div>
+                  Upgrade Possibilities
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed">{projectPage.upgrade}</p>
+              </section>
+
+              <section className="bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg shadow-2xl p-12 text-center">
+                <h2 className="text-3xl font-bold text-white mb-4">Interested in a Live Demo?</h2>
+                <p className="text-xl text-white mb-6 opacity-90">Contact us to see this project in action or discuss custom modifications</p>
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className="bg-white text-cyan-600 font-bold py-4 px-8 rounded-full hover:shadow-2xl transition-all duration-300 uppercase text-lg"
+                >
+                  Contact for Demo
+                </button>
+              </section>
             </div>
+          </div>
         </div>
-    </div>
+      );
+    }
 
-    <div id="project3" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project3')">&times;</span>
-                <h2>Railway Track Temperature Data Transfer System</h2>
-                <p>Seamless Integration with Railway Department Portal</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/data-transfer.jpg" alt="Data Transfer Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>This specialized data transfer system serves as the critical communication backbone between field monitoring devices and the centralized railway department dashboard. It ensures reliable, secure, and real-time transmission of temperature monitoring data for immediate analysis and decision-making.</p>
+    switch (currentPage) {
+      case 'home':
+        return (
+          <div>
+            <section className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center">
+              <div className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h1 className="text-6xl font-bold mb-6 leading-tight">
+                    Empowering Automation Through Embedded Systems & Robotics
+                  </h1>
+                  <p className="text-2xl mb-8 text-gray-300 leading-relaxed">
+                    We design, build, and deploy real-world hardware solutions using Arduino, ESP32, IoT, RFID systems, and robotics.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <button
+                      onClick={() => setCurrentPage('projects')}
+                      className="bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:shadow-cyan uppercase"
+                    >
+                      View Projects
+                    </button>
+                    <button
+                      onClick={() => setCurrentPage('services')}
+                      className="bg-transparent border-2 border-cyan-400 hover:bg-cyan-400 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 uppercase"
+                    >
+                      Our Services
+                    </button>
+                    <button
+                      onClick={() => setCurrentPage('contact')}
+                      className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 uppercase"
+                    >
+                      Contact Us
+                    </button>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-cyan-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                    <Cpu className="w-96 h-96 text-cyan-400 relative z-10" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="bg-white py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <div className="text-center mb-16">
+                  <h2 className="text-5xl font-bold text-gray-900 mb-6">Welcome to Our Development Workspace</h2>
+                  <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+                    Welcome to our development workspace where engineering meets automation. We build practical and scalable embedded solutions for industries, institutions, and startups. From concept to prototype and from prototype to functional demo, we convert ideas into working machines.
+                  </p>
                 </div>
 
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Developed secure API integration with railway department servers</li>
-                        <li>Implemented redundant communication channels (Primary: 4G, Backup: GSM)</li>
-                        <li>Created data buffering system for offline operation during network outages</li>
-                        <li>Designed encryption protocols meeting government security standards</li>
-                        <li>Built real-time dashboard with customizable visualization tools</li>
-                        <li>Established automatic synchronization and data validation mechanisms</li>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <h3 className="text-3xl font-bold text-gray-900 mb-6">What We Focus On</h3>
+                    <ul className="space-y-4">
+                      {[
+                        'Industry-level robotics systems',
+                        'IoT monitoring and sensor network devices',
+                        'RFID and automation-based control systems',
+                        'Smart safety and protection hardware',
+                        'Real-use embedded prototypes'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <ChevronRight className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                          <span className="text-lg text-gray-700">{item}</span>
+                        </li>
+                      ))}
                     </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Real-time Visibility:</strong> Instant access to field data for control room operators</li>
-                        <li><strong>Data Integrity:</strong> End-to-end encryption ensures secure transmission</li>
-                        <li><strong>Reliability:</strong> 99.8% uptime with automatic failover mechanisms</li>
-                        <li><strong>Scalability:</strong> System supports unlimited sensor nodes and locations</li>
-                        <li><strong>Compliance:</strong> Meets Indian Railway IT security and data protection standards</li>
+                  </div>
+                  <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 shadow-lg">
+                    <h3 className="text-3xl font-bold text-gray-900 mb-6">Why Choose Us</h3>
+                    <ul className="space-y-4">
+                      {[
+                        'Real hardware, not theory',
+                        'Purpose-driven engineering',
+                        'Customizable solutions',
+                        'Clean circuit logic & optimized control flow',
+                        'Built to solve real problems'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-lg text-gray-700 font-medium">{item}</span>
+                        </li>
+                      ))}
                     </ul>
+                  </div>
                 </div>
+              </div>
+            </section>
 
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Protocol: HTTPS with TLS 1.3 encryption</li>
-                        <li>Data Format: JSON with timestamp and geolocation tagging</li>
-                        <li>Transmission Frequency: Every 5 minutes (configurable)</li>
-                        <li>Bandwidth: Low data consumption (~50KB per transmission)</li>
-                        <li>Offline Buffer: Stores up to 72 hours of data locally</li>
-                        <li>Dashboard Access: Role-based authentication with audit logs</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="project4" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project4')">&times;</span>
-                <h2>Robotics & Inspection Bots</h2>
-                <p>Autonomous Industrial Inspection Solutions</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/inspection-robot.jpg" alt="Inspection Robot Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>Our custom-designed inspection robots are built to navigate challenging industrial environments, performing visual inspections, data collection, and monitoring tasks in hazardous or hard-to-reach areas. These autonomous systems enhance workplace safety while improving inspection efficiency and accuracy.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Designed modular robot chassis adaptable to different terrains and environments</li>
-                        <li>Integrated HD cameras, thermal imaging, and gas detection sensors</li>
-                        <li>Developed autonomous navigation using SLAM (Simultaneous Localization and Mapping)</li>
-                        <li>Created remote control interface with live video streaming</li>
-                        <li>Implemented obstacle detection and collision avoidance systems</li>
-                        <li>Built custom gripper mechanisms for sample collection</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Worker Safety:</strong> Eliminates human exposure to dangerous environments</li>
-                        <li><strong>24/7 Operation:</strong> Continuous monitoring without fatigue or breaks</li>
-                        <li><strong>Cost Efficiency:</strong> Reduces inspection time by 60% compared to manual methods</li>
-                        <li><strong>Data Accuracy:</strong> Consistent and repeatable inspection procedures</li>
-                        <li><strong>Remote Access:</strong> Inspect confined spaces and hazardous areas remotely</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Platform: ROS (Robot Operating System) on embedded Linux</li>
-                        <li>Sensors: Lidar, ultrasonic, IMU, and multi-spectral cameras</li>
-                        <li>Battery Life: 4-6 hours continuous operation</li>
-                        <li>Load Capacity: Up to 5kg payload</li>
-                        <li>Communication: Wi-Fi and 4G LTE with 1km range</li>
-                        <li>Environmental Rating: IP65 dust and water resistant</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="project5" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project5')">&times;</span>
-                <h2>Air Sterilizer System (UV/HEPA/Active Ion)</h2>
-                <p>Advanced Multi-Stage Air Purification Technology</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/air-sterilizer.jpg" alt="Air Sterilizer Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>Our medical-grade air sterilization system combines three proven technologies—UV-C germicidal irradiation, HEPA filtration, and active ion generation—to provide comprehensive air purification for hospitals, laboratories, offices, and clean room environments. The system effectively neutralizes airborne pathogens, allergens, and pollutants.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Engineered multi-stage filtration system with optimized airflow dynamics</li>
-                        <li>Integrated medical-grade UV-C lamps with automatic safety shutoff</li>
-                        <li>Developed microcontroller-based control system with touch interface</li>
-                        <li>Implemented real-time air quality monitoring with PM2.5, VOC, and CO2 sensors</li>
-                        <li>Created smartphone app for remote monitoring and control</li>
-                        <li>Designed quiet operation mode (below 40dB) for hospital environments</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Pathogen Elimination:</strong> 99.97% effectiveness against bacteria, viruses, and mold spores</li>
-                        <li><strong>Three-Layer Protection:</strong> HEPA filters particles, UV-C kills microbes, ions neutralize odors</li>
-                        <li><strong>Smart Operation:</strong> Auto-adjusts fan speed based on air quality readings</li>
-                        <li><strong>Energy Efficient:</strong> Low power consumption with eco mode</li>
-                        <li><strong>Medical Compliance:</strong> Meets hospital and clean room standards</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Coverage Area: Up to 800 sq. ft.</li>
-                        <li>HEPA Filter: H13 grade (99.97% efficiency at 0.3 microns)</li>
-                        <li>UV-C Power: 36W germicidal lamp with 9000-hour lifespan</li>
-                        <li>CADR Rating: 350 m³/hour</li>
-                        <li>Ion Output: 10 million negative ions per cm³</li>
-                        <li>Smart Features: Wi-Fi connectivity, app control, filter replacement alerts</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="project6" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project6')">&times;</span>
-                <h2>ESP32 Based AQI Meter with Display</h2>
-                <p>Portable Air Quality Monitoring Solution</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/aqi-meter.jpg" alt="AQI Meter Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>A compact and portable Air Quality Index (AQI) meter built on the ESP32 platform that provides real-time measurements of key air pollutants and environmental parameters. Perfect for homes, offices, schools, and outdoor air quality monitoring applications.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Selected and calibrated multiple sensor modules for accurate readings</li>
-                        <li>Developed custom PCB with ESP32 microcontroller and OLED display</li>
-                        <li>Created intuitive user interface showing real-time AQI, PM2.5, PM10, CO2, and temperature</li>
-                        <li>Implemented Wi-Fi connectivity for data logging to cloud platform</li>
-                        <li>Designed 3D-printed enclosure with ventilation for sensor accuracy</li>
-                        <li>Built mobile app for historical data visualization and alerts</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Health Awareness:</strong> Helps users understand and respond to air quality conditions</li>
-                        <li><strong>Real-time Monitoring:</strong> Instant feedback on indoor and outdoor air quality</li>
-                        <li><strong>Portable Design:</strong> Battery-powered for use anywhere</li>
-                        <li><strong>Smart Alerts:</strong> Notifications when air quality exceeds safe thresholds</li>
-                        <li><strong>Data Logging:</strong> Track air quality trends over time</li>
-                        <li><strong>Affordable:</strong> Cost-effective alternative to expensive commercial AQI meters</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Microcontroller: ESP32 dual-core with Wi-Fi and Bluetooth</li>
-                        <li>Sensors: PMS5003 (PM2.5/PM10), MQ-135 (CO2), DHT22 (temp/humidity)</li>
-                        <li>Display: 1.3" OLED (128x64 pixels)</li>
-                        <li>Battery: Rechargeable Li-ion with 8-hour runtime</li>
-                        <li>Connectivity: Wi-Fi for cloud sync and OTA updates</li>
-                        <li>Dimensions: 100mm x 60mm x 40mm (compact handheld size)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="project7" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project7')">&times;</span>
-                <h2>Wireless Charger Prototype</h2>
-                <p>Efficient Inductive Power Transfer Technology</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/wireless-charger.jpg" alt="Wireless Charger Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>An innovative wireless charging solution prototype demonstrating efficient power transfer using electromagnetic induction. This project explores advanced power electronics and resonant circuit design for next-generation charging applications for smartphones, wearables, and IoT devices.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Designed resonant inductive coupling circuit with optimized coil geometry</li>
-                        <li>Developed power management system with foreign object detection</li>
-                        <li>Implemented Qi wireless charging standard compatibility</li>
-                        <li>Created thermal management solution to prevent overheating</li>
-                        <li>Built prototype transmitter and receiver modules with custom PCBs</li>
-                        <li>Conducted efficiency testing achieving 75% power transfer efficiency</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Convenience:</strong> Eliminates cable clutter and wear on charging ports</li>
-                        <li><strong>Universal Compatibility:</strong> Works with Qi-enabled devices</li>
-                        <li><strong>Safety Features:</strong> Automatic shutoff, overheat protection, foreign object detection</li>
-                        <li><strong>Fast Charging:</strong> Supports up to 15W power delivery</li>
-                        <li><strong>Future Ready:</strong> Scalable design for higher power applications</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Power Output: 5W, 10W, and 15W modes</li>
-                        <li>Frequency: 110-205 kHz (Qi standard)</li>
-                        <li>Efficiency: Up to 75% at optimal alignment</li>
-                        <li>Charging Distance: Up to 8mm</li>
-                        <li>Input: 12V DC / 2A adapter</li>
-                        <li>Protection: Overcurrent, overvoltage, overtemperature safeguards</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="project8" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('project8')">&times;</span>
-                <h2>Camera Tracking Robot with ESP32 CAM</h2>
-                <p>Intelligent Surveillance and Object Tracking System</p>
-            </div>
-            <div class="modal-body">
-                <img src="images/camera-robot.jpg" alt="Camera Robot Detail" class="modal-image">
-                
-                <div class="modal-section">
-                    <h3>Project Overview</h3>
-                    <p>An intelligent mobile robot platform equipped with ESP32-CAM module that can autonomously track and follow objects or people. This system demonstrates computer vision integration with robotics for applications in surveillance, security, automated photography, and interactive demonstrations.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>What We Did</h3>
-                    <ul>
-                        <li>Integrated ESP32-CAM with robotic chassis and motor control system</li>
-                        <li>Implemented real-time image processing for object detection and tracking</li>
-                        <li>Developed PID-based control algorithm for smooth tracking motion</li>
-                        <li>Created web-based interface for live video streaming and remote control</li>
-                        <li>Added face detection capability using edge AI processing</li>
-                        <li>Built battery management system with low-power mode</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Purpose & Benefits</h3>
-                    <ul>
-                        <li><strong>Autonomous Surveillance:</strong> Automatically follows and monitors subjects of interest</li>
-                        <li><strong>Remote Monitoring:</strong> Live video streaming accessible from anywhere via web browser</li>
-                        <li><strong>Educational Platform:</strong> Excellent learning tool for robotics and computer vision</li>
-                        <li><strong>Cost-Effective:</strong> Uses affordable ESP32-CAM module (~$10)</li>
-                        <li><strong>Expandable:</strong> Modular design allows addition of more sensors and features</li>
-                    </ul>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Technical Specifications</h3>
-                    <ul>
-                        <li>Camera: OV2640 2MP with adjustable lens</li>
-                        <li>Processor: ESP32 dual-core @ 240MHz with Wi-Fi</li>
-                        <li>Video: 800x600 resolution at 25fps</li>
-                        <li>Motors: 4x DC gear motors with encoder feedback</li>
-                        <li>Range: Wi-Fi connectivity up to 50 meters</li>
-                        <li>Features: Face detection, color tracking, motion detection</li>
-                        <li>Battery: 7.4V Li-ion with 2-hour runtime</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="container" style="background: var(--light-bg); margin: 4rem auto; padding: 4rem 2rem; border-radius: 10px;">
-        <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">High-quality components and systems for your projects</p>
-        <div class="grid">
-            <div class="card">
-                <h3>Motor Drivers & Controllers</h3>
-                <p>Industrial-grade motor drivers and controllers for various applications, supporting DC, stepper, and servo motors with precise control capabilities.</p>
-            </div>
-            <div class="card">
-                <h3>Sensors & Measurement Devices</h3>
-                <p>Wide range of sensors including temperature, pressure, proximity, and environmental sensors for industrial and commercial applications.</p>
-            </div>
-            <div class="card">
-                <h3>Custom PCB Solutions</h3>
-                <p>Ready-to-use and custom-designed PCB modules for rapid prototyping and production deployment.</p>
-            </div>
-            <div class="card">
-                <h3>IoT Boards & Modules</h3>
-                <p>Complete IoT development boards with various connectivity options including Wi-Fi, Bluetooth, GSM, and LoRa.</p>
-            </div>
-            <div class="card">
-                <h3>Microcontroller Systems</h3>
-                <p>Development boards and evaluation kits based on popular microcontroller platforms for embedded system development.</p>
-            </div>
-            <div class="card">
-                <h3>Robotics Kits & Automation Modules</h3>
-                <p>Educational and professional robotics kits, along with industrial automation modules for process control and monitoring.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="container">
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">Get in touch with our team</p>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div>
-                        <h4>Email</h4>
-                        <p>kriratech@gmail.com</p>
+            <section className="bg-gray-50 py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <h2 className="text-5xl font-bold text-center text-gray-900 mb-16">What We Build</h2>
+                <div className="grid md:grid-cols-4 gap-8">
+                  {[
+                    { icon: Cpu, title: 'Robotics Systems', desc: 'Autonomous and controlled robots' },
+                    { icon: Wifi, title: 'IoT Solutions', desc: 'Smart monitoring devices' },
+                    { icon: Shield, title: 'Safety Systems', desc: 'Protection and warning hardware' },
+                    { icon: Zap, title: 'Automation', desc: 'RFID and sensor control' }
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+                      <div className="flex justify-center mb-4">
+                        <div className="bg-cyan-100 p-4 rounded-full">
+                          <item.icon className="w-12 h-12 text-cyan-500" />
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                      <p className="text-gray-600">{item.desc}</p>
                     </div>
+                  ))}
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div>
-                        <h4>Phone</h4>
-                        <p>+91 8956361121</p>
-                    </div>
+              </div>
+            </section>
+
+            <section className="bg-white py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <h2 className="text-5xl font-bold text-center text-gray-900 mb-4">Featured Projects</h2>
+                <p className="text-xl text-center text-gray-600 mb-16">Explore our showcase of real-world embedded systems solutions</p>
+                <div className="grid md:grid-cols-3 gap-8">
+                  {projects.slice(0, 3).map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      onClick={() => setCurrentPage(project.id)}
+                    />
+                  ))}
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <h4>Address</h4>
-                        <p>Meher darbar house,jai durga society 3, Manish nagar<br>Nagpur, Maharshtra - 440015</p>
-                    </div>
+                <div className="text-center mt-12">
+                  <button
+                    onClick={() => setCurrentPage('projects')}
+                    className="bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:shadow-lg uppercase"
+                  >
+                    View All Projects
+                  </button>
                 </div>
-                <a href="https://wa.me/918956361121" class="btn btn-primary" style="margin-top: 1rem; text-align: center;">
-                    💬 Chat on WhatsApp
-                </a>
+              </div>
+            </section>
+
+            <section className="bg-gradient-to-r from-cyan-400 to-blue-500 py-20">
+              <div className="max-w-4xl mx-auto px-6 text-center">
+                <h2 className="text-5xl font-bold text-white mb-6">Ready to Build Your Solution?</h2>
+                <p className="text-2xl text-white mb-8 opacity-90">
+                  Let's discuss how we can help automate your operations with custom embedded systems
+                </p>
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className="bg-white text-cyan-600 font-bold py-4 px-12 rounded-full hover:shadow-2xl transition-all duration-300 uppercase text-lg"
+                >
+                  Get In Touch
+                </button>
+              </div>
+            </section>
+          </div>
+        );
+
+      case 'about':
+        return (
+          <div className="min-h-screen">
+            <div className="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <h1 className="text-6xl font-bold mb-6">About Krira Tech</h1>
+                <p className="text-2xl text-gray-300">Engineering intelligent systems that matter</p>
+              </div>
             </div>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <input type="tel" placeholder="Your Phone">
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+
+            <div className="max-w-6xl mx-auto px-6 py-16">
+              <div className="space-y-16">
+                <section className="bg-white rounded-lg shadow-lg p-10">
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    We specialize in embedded systems engineering, IoT solutions, robotic automation, and custom electronic product development. Our work focuses on intelligent systems that solve problems in monitoring, control, safety, and movement automation.
+                  </p>
+                </section>
+
+                <section className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg shadow-lg p-10">
+                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Vision</h2>
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    To build real-world electronic solutions that enhance efficiency, safety, and automation across industries and everyday life.
+                  </p>
+                </section>
+
+                <section className="bg-white rounded-lg shadow-lg p-10">
+                  <h2 className="text-4xl font-bold text-gray-900 mb-8">Our Technical Strengths</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                      'Arduino & ESP32 Systems',
+                      'Digital & Analog Sensors',
+                      'Motor Drivers: L293D, ULN2003AN, IRFZ44N MOSFET',
+                      'Wireless Communication: Bluetooth, Wi-Fi, Serial',
+                      'Servo, DC Motor, Encoder Motor Integration',
+                      'Automation Logic for Industrial Applications'
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
+                        <ChevronRight className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                        <span className="text-lg text-gray-700">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg shadow-lg p-10">
+                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Microcontrollers We Use</h2>
+                  <div className="flex flex-wrap gap-4">
+                    {['Arduino Uno', 'Arduino Nano', 'ESP32', 'ESP32-CAM'].map((item, idx) => (
+                      <span key={idx} className="bg-white px-6 py-3 rounded-full shadow text-lg font-semibold text-gray-800">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="bg-white rounded-lg shadow-lg p-10">
+                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Sensors We Work With</h2>
+                  <div className="flex flex-wrap gap-3">
+                    {['RFID', 'IR Eye Blink', 'GY-61 Accelerometer', 'DHT11', 'SW420 Vibration', 'AQI/Dust Sensor', 'LDR', 'Ultrasonic', 'PIR Motion', 'MQ Gas Sensors'].map((item, idx) => (
+                      <span key={idx} className="bg-cyan-100 text-cyan-700 px-5 py-2 rounded-full text-base font-medium">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg shadow-2xl p-10 text-white">
+                  <h2 className="text-4xl font-bold mb-6">What Makes Our Builds Different</h2>
+                  <p className="text-xl leading-relaxed">
+                    Every device is made with real-world feasibility in mind — scalable, repairable, modular, and field-friendly. We don't just build prototypes that work on a bench; we engineer solutions that function reliably in actual industrial and commercial environments.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'services':
+        return (
+          <div className="min-h-screen">
+            <div className="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <h1 className="text-6xl font-bold mb-6">Our Core Services</h1>
+                <p className="text-2xl text-gray-300">Comprehensive embedded systems solutions for modern automation needs</p>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto px-6 py-16">
+              <div className="space-y-12">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden grid md:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-cyan-400 to-blue-500 p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <Cpu className="w-20 h-20 text-white mx-auto mb-4" />
+                      <h3 className="text-3xl font-bold text-white">Robotics Development</h3>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-8">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-4">What We Provide</h4>
+                    <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                      Warehouse robots, object handling bots, self-balancing robotic units, RFID-controlled autonomous systems, and custom robotic mechanisms tailored to your operational requirements.
+                    </p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Benefits</h4>
+                    <ul className="space-y-2 mb-6">
+                      {[
+                        'Reduces manual labor and operational costs',
+                        'Increases precision and repeatability',
+                        'Operates 24/7 without fatigue',
+                        'Scalable to multiple units',
+                        'Customizable for specific tasks'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <ChevronRight className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Where It Can Be Used</h4>
+                    <p className="text-gray-700">
+                      Manufacturing facilities, warehouses, logistics centers, material handling operations, retail automation, hospital logistics, educational institutions.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden grid md:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <Wifi className="w-20 h-20 text-white mx-auto mb-4" />
+                      <h3 className="text-3xl font-bold text-white">IoT Systems</h3>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-8">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-4">What We Provide</h4>
+                    <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                      Wi-Fi and Bluetooth monitoring dashboards, air quality index systems, live data logging platforms, environmental monitoring stations, and cloud-connected sensor networks.
+                    </p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Benefits</h4>
+                    <ul className="space-y-2 mb-6">
+                      {[
+                        'Real-time remote monitoring from anywhere',
+                        'Historical data tracking and analytics',
+                        'Automated alerts and notifications',
+                        'Energy-efficient wireless operation',
+                        'Easy integration with existing systems'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <ChevronRight className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Where It Can Be Used</h4>
+                    <p className="text-gray-700">
+                      Smart buildings, industrial facilities, agriculture, environmental monitoring, smart homes, healthcare facilities, research laboratories.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden grid md:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-green-500 to-cyan-500 p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <Zap className="w-20 h-20 text-white mx-auto mb-4" />
+                      <h3 className="text-3xl font-bold text-white">RFID Automation</h3>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-8">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-4">What We Provide</h4>
+                    <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                      RFID-based movement logic systems, scanning and access-triggered action mechanisms, automated sorting systems, and identity-based control solutions.
+                    </p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Benefits</h4>
+                    <ul className="space-y-2 mb-6">
+                      {[
+                        'Eliminates manual identification processes',
+                        'Extremely fast and accurate scanning',
+                        'Works without line-of-sight requirement',
+                        'Programmable action triggering',
+                        'Secure access control integration'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <ChevronRight className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Where It Can Be Used</h4>
+                    <p className="text-gray-700">
+                      Inventory management, access control systems, automated libraries, parking systems, retail checkout, supply chain tracking, asset management.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden grid md:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-orange-500 to-red-500 p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <Cpu className="w-20 h-20 text-white mx-auto mb-4" />
+                      <h3 className="text-3xl font-bold text-white">Motor & Mechanism Control</h3>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-8">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-4">What We Provide</h4>
+                    <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                      DC, servo, and stepper motor automation for mechanical applications, precise position control systems, speed control mechanisms, and synchronized multi-motor operations.
+                    </p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Benefits</h4>
+                    <ul className="space-y-2 mb-6">
+                      {[
+                        'Precise control over movement and positioning',
+                        'Variable speed control for different operations',
+                        'Smooth acceleration and deceleration',
+                        'Energy-efficient operation',
+                        'Programmable motion profiles'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <ChevronRight className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Where It Can Be Used</h4>
+                    <p className="text-gray-700">
+                      CNC machines, conveyor systems, automated gates, robotic arms, material handling equipment, packaging machines, 3D printers.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden grid md:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-red-500 to-pink-500 p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <Shield className="w-20 h-20 text-white mx-auto mb-4" />
+                      <h3 className="text-3xl font-bold text-white">Safety Monitoring</h3>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-8">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-4">What We Provide</h4>
+                    <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                      Eye blink safety systems, disturbance alarm mechanisms, early warning solutions for equipment and personnel, vibration detection systems, and drowsiness monitoring.
+                    </p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Benefits</h4>
+                    <ul className="space-y-2 mb-6">
+                      {[
+                        'Prevents accidents before they occur',
+                        'Immediate alert generation',
+                        'Reduces workplace injuries',
+                        'Continuous 24/7 monitoring',
+                        'Complements existing safety protocols'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <ChevronRight className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Where It Can Be Used</h4>
+                    <p className="text-gray-700">
+                      Manufacturing plants, construction sites, mining operations, transportation, heavy machinery operations, security systems.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden grid md:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-purple-500 to-indigo-500 p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <Zap className="w-20 h-20 text-white mx-auto mb-4" />
+                      <h3 className="text-3xl font-bold text-white">Product Prototyping</h3>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-8">
+                    <h4 className="text-2xl font-bold text-gray-900 mb-4">What We Provide</h4>
+                    <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                      End-to-end hardware development for startups and institutions, from concept validation to functional prototypes, PCB design, enclosure design, and production-ready documentation.
+                    </p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Benefits</h4>
+                    <ul className="space-y-2 mb-6">
+                      {[
+                        'Rapid concept-to-prototype development',
+                        'Cost-effective proof of concept',
+                        'Iterative design refinement',
+                        'Production-ready solutions',
+                        'Technical documentation included'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <ChevronRight className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">Where It Can Be Used</h4>
+                    <p className="text-gray-700">
+                      Startups launching hardware products, research institutions, product development companies, innovation labs, educational projects.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl shadow-2xl p-12">
+                <h2 className="text-4xl font-bold text-white mb-8 text-center">Why Our Solutions Matter</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    { title: 'Reduces Manual Operations', desc: 'Automate repetitive tasks and free up human resources for higher-value work' },
+                    { title: 'Improves Safety & Efficiency', desc: 'Prevent accidents and optimize processes with intelligent monitoring and control' },
+                    { title: 'Smart Automation with Sensor Logic', desc: 'Make decisions based on real-time data from multiple sensor inputs' },
+                    { title: 'Expandable and Future-Upgrade Ready', desc: 'Our modular designs allow easy addition of new features and capabilities' }
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-white bg-opacity-20 backdrop-blur rounded-lg p-6">
+                      <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                      <p className="text-white text-lg opacity-90">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'projects':
+        return (
+          <div className="min-h-screen">
+            <div className="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <h1 className="text-6xl font-bold mb-6">Our Projects</h1>
+                <p className="text-2xl text-gray-300">Real-world embedded systems solving real problems</p>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto px-6 py-16">
+              <p className="text-xl text-gray-700 mb-12 text-center leading-relaxed">
+                Below are our highlight projects showcasing our expertise in robotics, IoT, RFID automation, and safety systems. Click on any project to see detailed information about its design, functionality, and real-world applications.
+              </p>
+              <div className="grid md:grid-cols-3 gap-8">
+                {projects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onClick={() => setCurrentPage(project.id)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-cyan-400 to-blue-500 py-16">
+              <div className="max-w-4xl mx-auto px-6 text-center">
+                <h2 className="text-4xl font-bold text-white mb-4">Have a Custom Project in Mind?</h2>
+                <p className="text-xl text-white mb-8 opacity-90">
+                  We can design and build embedded systems tailored to your specific requirements
+                </p>
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className="bg-white text-cyan-600 font-bold py-4 px-10 rounded-full hover:shadow-2xl transition-all duration-300 uppercase text-lg"
+                >
+                  Discuss Your Project
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'contact':
+        return (
+          <div className="min-h-screen">
+            <div className="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-20">
+              <div className="max-w-6xl mx-auto px-6">
+                <h1 className="text-6xl font-bold mb-6">Let's Build Something Together</h1>
+                <p className="text-2xl text-gray-300">Get in touch to discuss your embedded systems project</p>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto px-6 py-16">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div className="space-y-8">
+                  <div className="bg-white rounded-lg shadow-lg p-8">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Information</h2>
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-4">
+                        <div className="bg-cyan-100 p-3 rounded-full">
+                          <MapPin className="w-6 h-6 text-cyan-600" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900 mb-1">Location</h3>
+                          <p className="text-gray-700">Nagpur, Maharashtra, India</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-4">
+                        <div className="bg-cyan-100 p-3 rounded-full">
+                          <Phone className="w-6 h-6 text-cyan-600" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900 mb-1">Phone / WhatsApp</h3>
+                          <p className="text-gray-700">[Your Contact Number]</p>
+                          <p className="text-sm text-gray-500 mt-1">Available for calls and WhatsApp messages</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-4">
+                        <div className="bg-cyan-100 p-3 rounded-full">
+                          <Mail className="w-6 h-6 text-cyan-600" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900 mb-1">Email</h3>
+                          <p className="text-gray-700">[Your Email Address]</p>
+                          <p className="text-sm text-gray-500 mt-1">We respond within 24 hours</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-4">
+                        <div className="bg-cyan-100 p-3 rounded-full">
+                          <Clock className="w-6 h-6 text-cyan-600" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900 mb-1">Available Hours</h3>
+                          <p className="text-gray-700">Monday – Saturday</p>
+                          <p className="text-gray-700">10:00 AM – 7:00 PM IST</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg shadow-lg p-8">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">Quick Inquiry</h3>
+                    <p className="text-gray-700 mb-4">
+                      For immediate assistance or quick questions, reach out via WhatsApp or call us directly during business hours.
+                    </p>
+                    <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 uppercase">
+                      Message on WhatsApp
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg p-8">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                  <form className="space-y-6">
+                    <div>
+                      <label className="block text-gray-700 font-semibold mb-2">Your Name *</label>
+                      <input
+                        type="text"
+                        placeholder="Enter your full name"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 font-semibold mb-2">Email Address *</label>
+                      <input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                      <input
+                        type="tel"
+                        placeholder="+91 XXXXXXXXXX"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 font-semibold mb-2">Project Type</label>
+                      <select className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors">
+                        <option>Select a service</option>
+                        <option>Robotics Development</option>
+                        <option>IoT Solutions</option>
+                        <option>RFID Automation</option>
+                        <option>Safety Systems</option>
+                        <option>Product Prototyping</option>
+                        <option>Custom Project</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 font-semibold mb-2">Project Details *</label>
+                      <textarea
+                        rows="5"
+                        placeholder="Tell us about your project requirements, timeline, and budget..."
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors resize-none"
+                      ></textarea>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg uppercase text-lg"
+                    >
+                      Send Message
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <div className="mt-20">
+                <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      q: 'What is the typical project timeline?',
+                      a: 'Simple prototypes can be completed in 2-3 weeks, while complex systems may take 6-8 weeks. We provide detailed timelines during initial consultation.'
+                    },
+                    {
+                      q: 'Do you provide post-deployment support?',
+                      a: 'Yes, we offer maintenance packages and technical support for all projects. We ensure your systems run smoothly even after deployment.'
+                    },
+                    {
+                      q: 'Can you modify existing projects?',
+                      a: 'Absolutely! We can upgrade, modify, or expand any of our existing projects to match your specific requirements.'
+                    },
+                    {
+                      q: 'What industries do you serve?',
+                      a: 'We work with manufacturing, logistics, healthcare, education, agriculture, security, and retail sectors among others.'
+                    },
+                    {
+                      q: 'Do you offer on-site installation?',
+                      a: 'Yes, for projects within India, we provide on-site installation, testing, and training services.'
+                    },
+                    {
+                      q: 'What is included in the project cost?',
+                      a: 'All hardware components, software development, testing, documentation, and basic training are included. Custom requirements are quoted separately.'
+                    }
+                  ].map((faq, idx) => (
+                    <div key={idx} className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-6 shadow">
+                      <h3 className="font-bold text-lg text-gray-900 mb-3">{faq.q}</h3>
+                      <p className="text-gray-700">{faq.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <nav className="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setCurrentPage('home')}>
+              <Cpu className="w-10 h-10 text-cyan-400" />
+              <div>
+                <h1 className="text-2xl font-bold">Krira Tech</h1>
+                <p className="text-xs text-gray-400">Embedded Systems & Robotics</p>
+              </div>
+            </div>
+
+            <div className="hidden md:flex items-center gap-8">
+              {navigation.map((item) => (
+                <button
+                  key={item.page}
+                  onClick={() => setCurrentPage(item.page)}
+                  className={`font-semibold transition-colors duration-300 ${
+                    currentPage === item.page
+                      ? 'text-cyan-400'
+                      : 'text-white hover:text-cyan-400'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden"
+            >
+              {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+            </button>
+          </div>
+
+          {mobileMenuOpen && (
+            <div className="md:hidden pb-6">
+              {navigation.map((item) => (
+                <button
+                  key={item.page}
+                  onClick={() => {
+                    setCurrentPage(item.page);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-3 font-semibold transition-colors duration-300 ${
+                    currentPage === item.page
+                      ? 'text-cyan-400'
+                      : 'text-white hover:text-cyan-400'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-    </section>
+      </nav>
 
-    <footer>
-        <p>&copy; 2024 Krira Tech. All rights reserved. | Engineering Safety, Automation & Innovation</p>
-    </footer>
+      <main>{renderPage()}</main>
 
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+      <footer className="bg-slate-900 text-white py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Cpu className="w-8 h-8 text-cyan-400" />
+                <h3 className="text-xl font-bold">Krira Tech</h3>
+              </div>
+              <p className="text-gray-400">
+                Building intelligent automation solutions for a smarter tomorrow
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+              <div className="space-y-2">
+                {navigation.map((item) => (
+                  <button
+                    key={item.page}
+                    onClick={() => setCurrentPage(item.page)}
+                    className="block text-gray-400 hover:text-cyan-400 transition-colors"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-4">Our Expertise</h4>
+              <div className="space-y-2 text-gray-400">
+                <p>Embedded Systems</p>
+                <p>Robotics Development</p>
+                <p>IoT Solutions</p>
+                <p>RFID Automation</p>
+                <p>Safety Hardware</p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-700 pt-8 text-center">
+            <p className="text-gray-400 text-lg mb-2">
+              Embedded Systems | Robotics | IoT | RFID | Automation
+            </p>
+            <p className="text-gray-500">© {new Date().getFullYear()} Krira Tech. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    document.querySelectorAll('.nav-links a').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
-        });
-
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(31, 41, 55, 0.95)';
-            } else {
-                nav.style.background = 'var(--dark-bg)';
-            }
-        });
-    </script>
-</body>
-</html>
+export default KriraTechWebsite;
